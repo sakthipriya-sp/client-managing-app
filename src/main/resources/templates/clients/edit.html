@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.com">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Client Manager</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+      body {
+        background: #f1f8ff; /* Light soothing background */
+        font-family: 'Arial', sans-serif;
+        color: #333;
+        padding-top: 50px;
+      }
+
+      .container {
+        background-color: #fff;
+        border-radius: 15px;
+        padding: 40px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        max-width: 800px;
+        margin: 0 auto; /* Center the container */
+      }
+
+      h2 {
+        color: #4e9fd1; /* Soft soothing blue */
+        font-size: 28px;
+        font-weight: 700;
+        margin-bottom: 30px;
+        text-align: center;
+      }
+
+      /* Button Styling with Animation */
+      .btn-primary {
+        background-color: #7ec8f4;
+        border-color: #7ec8f4;
+        font-size: 18px;
+        padding: 10px 20px;
+        border-radius: 50px;
+        transition: all 0.3s ease-in-out;
+      }
+
+      .btn-primary:hover {
+        background-color: #4e9fd1;
+        border-color: #4e9fd1;
+        transform: scale(1.1) translateY(-5px); /* Button grow with slight upward movement */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Shadow effect */
+      }
+
+      .btn-primary:active {
+        transform: scale(1.05); /* Button slightly shrink on click */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .btn-outline-primary {
+        color: #4e9fd1;
+        border-color: #4e9fd1;
+        font-size: 18px;
+        padding: 10px 20px;
+        border-radius: 50px;
+        transition: all 0.3s ease-in-out;
+      }
+
+      .btn-outline-primary:hover {
+        background-color: #4e9fd1;
+        color: white;
+        border-color: #4e9fd1;
+        transform: scale(1.1) translateY(-5px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Form Input Styling */
+      .form-control, .form-select {
+        border-radius: 10px;
+        padding: 12px;
+        font-size: 16px;
+      }
+
+      .form-control-plaintext {
+        background-color: #f1f8ff; /* Light background for readonly fields */
+        font-size: 16px;
+      }
+
+      .text-danger {
+        font-size: 14px;
+      }
+
+      .row {
+        margin-bottom: 20px;
+      }
+
+      .col-form-label {
+        font-weight: 600;
+        font-size: 16px;
+      }
+
+      /* Form Layout Adjustments */
+      .offset-sm-4 {
+        margin-left: 33.33333333%; /* Center the buttons */
+      }
+
+      /* Styling for Select box */
+      .form-select {
+        background-color: #fafafa;
+        border-radius: 10px;
+      }
+
+      /* Container box shadow effect */
+      .row.mb-3 {
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        background-color: #ffffff;
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <div class="container my-4">
+      <div class="row">
+        <div class="col-md-8 mx-auto rounded border p-4">
+          <h2>Edit Client</h2>
+
+          <form method="post" th:object="${clientDto}">
+            <div class="row mb-3">
+              <label class="col-sm-4 col-form-label">Client ID</label>
+              <div class="col-sm-8">
+                <input class="form-control-plaintext" readonly th:value="${client.id}">
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <label class="col-sm-4 col-form-label">First Name</label>
+              <div class="col-sm-8">
+                <input class="form-control" th:field="${clientDto.firstName}">
+                <p th:if="${#fields.hasErrors('firstName')}" th:errorclass="text-danger" th:errors="${clientDto.firstName}"></p>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <label class="col-sm-4 col-form-label">Last Name</label>
+              <div class="col-sm-8">
+                <input class="form-control" th:field="${clientDto.lastName}">
+                <p th:if="${#fields.hasErrors('lastName')}" th:errorclass="text-danger" th:errors="${clientDto.lastName}"></p>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <label class="col-sm-4 col-form-label">Email</label>
+              <div class="col-sm-8">
+                <input class="form-control" th:field="${clientDto.email}">
+                <p th:if="${#fields.hasErrors('email')}" th:errorclass="text-danger" th:errors="${clientDto.email}"></p>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <label class="col-sm-4 col-form-label">Phone</label>
+              <div class="col-sm-8">
+                <input class="form-control" th:field="${clientDto.phone}">
+                <p th:if="${#fields.hasErrors('phone')}" th:errorclass="text-danger" th:errors="${clientDto.phone}"></p>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <label class="col-sm-4 col-form-label">Address</label>
+              <div class="col-sm-8">
+                <input class="form-control" th:field="${clientDto.address}">
+                <p th:if="${#fields.hasErrors('address')}" th:errorclass="text-danger" th:errors="${clientDto.address}"></p>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <label class="col-sm-4 col-form-label">Status</label>
+              <div class="col-sm-8">
+                <select class="form-select" th:field="${clientDto.status}">
+                  <option value="New">New</option>
+                  <option value="Permanent">Permanent</option>
+                  <option value="Lead">Lead</option>
+                  <option value="Occasional">Occasional</option>
+                  <option value="Inactive">Inactive</option>
+                </select>
+                <p th:if="${#fields.hasErrors('status')}" th:errorclass="text-danger" th:errors="${clientDto.status}"></p>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <label class="col-sm-4 col-form-label">Created At</label>
+              <div class="col-sm-8">
+                <input class="form-control-plaintext" readonly th:value="${client.createdAt}">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="offset-sm-4 col-sm-4 d-grid">
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+              <div class="offset-sm-4 col-sm-4 d-grid">
+                <a class="btn btn-outline-primary" href="/clients">Cancel</a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  </body>
+</html>
